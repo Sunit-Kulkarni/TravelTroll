@@ -15,14 +15,54 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
        crossorigin="anonymous"></script>
 
-    
+    <!-- DOC CSS -->
+    <link rel="stylesheet" href="./index.css">
+
 </head>
 <body>
-  <div class="container">
-    <h1>Travel Trolllllllllllllllll</h1>
+    <!-- THIS CONTAINS THE ENTIRE SITE -->
+    <div class="main-container container-fluid">
 
-    <a href="CreateTrollReview.html">Create a new Review</a>    
-  </div>
+        <!-- BANNER -->
+        <div class="row" id="banner">
+            <div class="col-12">
 
+                <!-- SECTION TITLE -->
+                <div class="thetitle">
+                  <h1 class="display-1" id="title">
+                    Travel Troll
+                  </h1>
+                </div>
+
+                <!-- ADD REVIEW BUTTON -->
+                <div class="add-button">
+                    <button type="button" class="btn btn-outline-danger btn-lg" href="./CreateTrollReview.html">Add Review!</button>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- RECENT REVIEWS -->
+        <div class="row" id="reviews">
+            <div class="col-12">
+
+                <!-- SECTION TITLE -->
+                <h4 class="reviews-title display-4">Recent Reviews</h4>
+                <div class="divider"></div>
+                <!-- TOP 10 REVIEWS -->
+                <div class="top-reviews">
+                <!-- INSERT REVIEWS HERE -->
+                </div>
+
+            </div>
+        </div>
+
+        <!-- THE FOOTER -->
+        <div class="row" id="footer">
+          <div class="col-12">
+            <h6 class="display-6" id="footer-text">
+              Built by Cliff, Kim, Sunit & Zach 
+            </h6>
+    </div>
 </body>
 </html>
