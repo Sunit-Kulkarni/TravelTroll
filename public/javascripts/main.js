@@ -1,0 +1,6 @@
+$(() => {
+//JQUERY STUFF IN HERE
+
+    
+
+});
