@@ -7,12 +7,15 @@ const port = 3000;
 //initialize sequelize;
 const sequelize = new Sequelize('postgres://cliff:@localhost:5432/traveltroll');
 
+//Creating user table with on field named user
 const User = sequelize.define('users', {
     user: {
         type: Sequelize.TEXT
     }
 })
 
+//Creating Review tables to hold all review.
+//Belongs to a user;
 const Review = sequelize.define('review', {
     reviews: {
       type: Sequelize.TEXT
@@ -27,11 +30,13 @@ const Review = sequelize.define('review', {
         type: Sequelize.INTEGER
     }
 });
-
+//Review belongs to user
 Review.belongsTo(User);
 
+User.sequelize.sync().then(() => {});
+Review.sequelize.sync().then(() =>{});
 
-//replacement for body-parser
+//express replacement for body-parser
 app.use(express.json());
 
 // sets the static folder for html/javascript/css/etc
@@ -42,8 +47,7 @@ app.use(express.static('public'));
 app.get("/api", (req, res) => {
     Review.findAll({}).then((reviews) => {
         res.json(reviews);    
-    })
-    
+    })  
 })
 
 
@@ -60,8 +64,8 @@ app.put("/api/:id/edit", (req,res) => {
 app.delete('/api/:id/delete', (req,res) => {
     res.json({delete: "Route"})
 })
-User.sequelize.sync().then(() => {});
-Review.sequelize.sync().then(() =>{});
+
+
 
 app.listen(port, () => {
     console.log("Running on "+ port);
