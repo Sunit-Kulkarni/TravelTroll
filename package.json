@@ -18,6 +18,7 @@
   "homepage": "https://github.com/Sunit-Kulkarni/TravelTroll#readme",
   "dependencies": {
     "express": "^4.16.2",
+    "nodemon": "^1.12.1",
     "pg": "^7.4.0",
     "sequelize": "^4.22.6"
   }
