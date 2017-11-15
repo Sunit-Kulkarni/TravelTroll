@@ -20,11 +20,11 @@ const Review = sequelize.define('review', {
     city: {
       type: Sequelize.STRING
     },
-    state: {
-        type: Sequelize.STRING
-    },
     country: {
         type: Sequelize.STRING
+    },
+    rating: {
+        type: Sequelize.INTEGER
     }
 });
 
