@@ -1,7 +1,35 @@
 const express = require('express');
+const Sequelize = require('sequelize');
 
 const app = express();
 const port = 3000;
+
+//initialize sequelize;
+const sequelize = new Sequelize('postgres://cliff:@localhost:5432/traveltroll');
+
+const User = sequelize.define('users', {
+    user: {
+        type: Sequelize.TEXT
+    }
+})
+
+const Review = sequelize.define('review', {
+    reviews: {
+      type: Sequelize.TEXT
+    },
+    city: {
+      type: Sequelize.STRING
+    },
+    state: {
+        type: Sequelize.STRING
+    },
+    country: {
+        type: Sequelize.STRING
+    }
+});
+
+Review.belongsTo(User);
+
 
 //replacement for body-parser
 app.use(express.json());
@@ -12,7 +40,10 @@ app.use(express.static('public'));
 
 //read http://localhost:3000/api/
 app.get("/api", (req, res) => {
-    res.json({get: "Route"})
+    Review.findAll({}).then((reviews) => {
+        res.json(reviews);    
+    })
+    
 })
 
 
@@ -29,6 +60,8 @@ app.put("/api/:id/edit", (req,res) => {
 app.delete('/api/:id/delete', (req,res) => {
     res.json({delete: "Route"})
 })
+User.sequelize.sync().then(() => {});
+Review.sequelize.sync().then(() =>{});
 
 app.listen(port, () => {
     console.log("Running on "+ port);
