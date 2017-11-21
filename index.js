@@ -4,6 +4,12 @@ const Sequelize = require('sequelize');
 const app = express();
 const port = 5432;
 
+//express replacement for body-parser
+app.use(express.json());
+
+// sets the static folder for html/javascript/css/etc
+app.use(express.static('public'));
+
 //initialize sequelize; CHANGE TO YOUR USERNAME
 const sequelize = new Sequelize('postgres://sunitkulkarni:@localhost:5432/traveltroll');
 
@@ -18,7 +24,7 @@ sequelize
     })
 
 //Creating user table with on field named user
-const User = sequelize.define('users', {
+const User = sequelize.define('user', {
     user: {
         type: Sequelize.TEXT
     }
@@ -45,12 +51,6 @@ Review.belongsTo(User);
 
 User.sequelize.sync().then(() => {});
 Review.sequelize.sync().then(() =>{});
-
-//express replacement for body-parser
-app.use(express.json());
-
-// sets the static folder for html/javascript/css/etc
-app.use(express.static('public'));
 
 
 //read http://localhost:3000/api/
@@ -80,7 +80,8 @@ app.get("/api", (req, res) => {
 
 //create http://localhost:3000/api/create
 app.post("/api/create", (req,res) => {
-    User.create({ //Create User
+    User.sync({force: true}).then(() => {
+        return User.create({ //Create User
             user: $("#submitForm").attr("exampleInputUser") 
         })
         .then(() => Review.create({ //Create Review from the User
@@ -89,9 +90,7 @@ app.post("/api/create", (req,res) => {
             country: $("#submitForm").attr("exampleInputCountry"),
             rating: $("#submitForm").attr("exampleInputRating")
         }))
-    Review.belongsTo(User)
-    User.sequelize.sync().then(() => {})
-    Review.sequelize.sync().then(() =>{})
+    })
     res.send(User)
 })
 
