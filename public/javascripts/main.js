@@ -2,7 +2,7 @@ $(() => {
 //JQUERY STUFF IN HERE
 
     $.ajax({
-        url: "http://localhost:3000/api",
+        url: "http://localhost:5432/api",
         method:"GET"
     })
     .done((reviews) => {
@@ -22,21 +22,23 @@ $(() => {
         $(".top-reviews").append(recentReviews);
     };
 
+    //Action for clicking submit review button
     $("#submitReview").click((e) => {
         e.preventDefault();
-        $.ajax({url: "http://localhost:3000/api/create",
+        $.ajax({url: "http://localhost:5432/api/create",
                 method: "POST"
         };
     })
     .done(() => {
         sequelize.sync()
-        .then(() => Review.create({
-            user: $("#submitForm").attr("exampleInputUser"),
+        .then(() => User.create({ //Create User
+            user: $("#submitForm").attr("exampleInputUser") 
+        }))
+        .then(() => Review.create({ //Create Review from the User
+            review: $("#submitForm").attr("exampleInputReview"),
             city: $("#submitForm").attr("exampleInputCity"),
             country: $("#submitForm").attr("exampleInputCountry"),
-            stars: $("#submitForm").attr("exampleInputRating"),
-            image: '',
-            review: $("#submitForm").attr("exampleInputReview")
+            rating: $("#submitForm").attr("exampleInputRating")
         }))
     })
 });

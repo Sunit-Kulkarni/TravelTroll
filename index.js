@@ -4,8 +4,18 @@ const Sequelize = require('sequelize');
 const app = express();
 const port = 5432;
 
-//initialize sequelize;
-const sequelize = new Sequelize('postgres://localhost:5432/traveltroll');
+//initialize sequelize; CHANGE TO YOUR USERNAME
+const sequelize = new Sequelize('postgres://sunitkulkarni:@localhost:5432/traveltroll');
+
+//authenticates connection
+sequelize
+    .authenticate()
+    .then(() => {
+        console.log('Connection has been established successfully');
+    })
+    .catch(err => {
+        console.error('Unable to connect to the database:', err);
+    })
 
 //Creating user table with on field named user
 const User = sequelize.define('users', {
@@ -17,7 +27,7 @@ const User = sequelize.define('users', {
 //Creating Review tables to hold all review.
 //Belongs to a user;
 const Review = sequelize.define('review', {
-    reviews: {
+    review: {
       type: Sequelize.TEXT
     },
     city: {
@@ -45,26 +55,26 @@ app.use(express.static('public'));
 
 //read http://localhost:3000/api/
 app.get("/api", (req, res) => {
-    // Review.findAll({}).then((reviews) => {
-    //     res.json(reviews);    
-    // })  
-    let reviews = [{
-        user: 'kim',
-        city: 'las vegas',
-        country: 'usa',
-        stars: 4,
-        image: '',
-        review: 'The food was delicious at Bacchanals.'
-        },
-    {
-        user: 'cliff',
-        city: 'maui',
-        country: 'usa',
-        stars: 5,
-        image: '',
-        review: 'I would avoid all volcanos.'
-    }]
-    res.json(reviews)
+    Review.findAll({}).then((reviews) => {
+        res.json(reviews);    
+    })  
+//     let reviews = [{
+//         user: 'kim',
+//         city: 'las vegas',
+//         country: 'usa',
+//         stars: 4,
+//         image: '',
+//         review: 'The food was delicious at Bacchanals.'
+//         },
+//     {
+//         user: 'cliff',
+//         city: 'maui',
+//         country: 'usa',
+//         stars: 5,
+//         image: '',
+//         review: 'I would avoid all volcanos.'
+//     }]
+//     res.json(reviews)
 })
 
 
