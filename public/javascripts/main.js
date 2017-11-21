@@ -5,12 +5,12 @@ $(() => {
         url: "http://localhost:3000/api",
         method:"GET"
     })
-    .done((reviews)=> {
+    .done((reviews) => {
         console.log(reviews);
         renderReviews(reviews);
     });
 
-    renderReviews = (reviews)=> {
+    renderReviews = (reviews) => {
         let recentReviews = "";
 
         reviews.forEach((review) => {
