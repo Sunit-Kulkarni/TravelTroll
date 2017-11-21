@@ -29,16 +29,16 @@ $(() => {
                 method: "POST"
         };
     })
-    .done(() => {
-        sequelize.sync()
-        .then(() => User.create({ //Create User
-            user: $("#submitForm").attr("exampleInputUser") 
-        }))
-        .then(() => Review.create({ //Create Review from the User
-            review: $("#submitForm").attr("exampleInputReview"),
-            city: $("#submitForm").attr("exampleInputCity"),
-            country: $("#submitForm").attr("exampleInputCountry"),
-            rating: $("#submitForm").attr("exampleInputRating")
-        }))
-    })
+    // .done(() => {
+    //     sequelize.sync()
+    //     .then(() => User.create({ //Create User
+    //         user: $("#submitForm").attr("exampleInputUser") 
+    //     }))
+    //     .then(() => Review.create({ //Create Review from the User
+    //         review: $("#submitForm").attr("exampleInputReview"),
+    //         city: $("#submitForm").attr("exampleInputCity"),
+    //         country: $("#submitForm").attr("exampleInputCountry"),
+    //         rating: $("#submitForm").attr("exampleInputRating")
+    //     }))
+    // })
 });

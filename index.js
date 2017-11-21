@@ -80,7 +80,19 @@ app.get("/api", (req, res) => {
 
 //create http://localhost:3000/api/create
 app.post("/api/create", (req,res) => {
-    res.json({post: "Route"})
+    User.create({ //Create User
+            user: $("#submitForm").attr("exampleInputUser") 
+        })
+        .then(() => Review.create({ //Create Review from the User
+            review: $("#submitForm").attr("exampleInputReview"),
+            city: $("#submitForm").attr("exampleInputCity"),
+            country: $("#submitForm").attr("exampleInputCountry"),
+            rating: $("#submitForm").attr("exampleInputRating")
+        }))
+    Review.belongsTo(User)
+    User.sequelize.sync().then(() => {})
+    Review.sequelize.sync().then(() =>{})
+    res.send(User)
 })
 
 //update http://localhost:3000/api/1/edit
