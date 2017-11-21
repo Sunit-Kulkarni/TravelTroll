@@ -21,4 +21,14 @@ $(() => {
         });
         $(".top-reviews").append(recentReviews);
     };
+
+    $("#submitReview").click((e) => {
+        e.preventDefault();
+        $.ajax({url: "http://localhost:3000/api/create",
+                method: "POST",
+                data: { id: $("#Shareitem").val(), access_token: $("#access_token").val() },
+                success:function(result){
+          $("#sharelink").html(result);
+        }});
+    })
 });
