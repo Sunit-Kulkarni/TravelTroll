@@ -2,10 +2,10 @@ const express = require('express');
 const Sequelize = require('sequelize');
 
 const app = express();
-const port = 3000;
+const port = 5432;
 
 //initialize sequelize;
-const sequelize = new Sequelize('postgres://kim.lim:@localhost:5432/traveltroll');
+const sequelize = new Sequelize('postgres://localhost:5432/traveltroll');
 
 //Creating user table with on field named user
 const User = sequelize.define('users', {
