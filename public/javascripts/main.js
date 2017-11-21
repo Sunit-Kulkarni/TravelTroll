@@ -1,3 +1,4 @@
+/* global $ */
 $(() => {
 //JQUERY STUFF IN HERE
 
@@ -27,8 +28,8 @@ $(() => {
         e.preventDefault();
         $.ajax({url: "http://localhost:5432/api/create",
                 method: "POST"
-        };
-    })
+        });
+    });
     // .done(() => {
     //     sequelize.sync()
     //     .then(() => User.create({ //Create User
